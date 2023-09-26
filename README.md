@@ -7,3 +7,4 @@ Collaborators:
 - Johnson Chen (Code Reviewer)
 - Nikhil P (DevOps Engineer)
 - Zhuowen Zhong (Test Engineer)
+- Kazi Sadman (Architect)
