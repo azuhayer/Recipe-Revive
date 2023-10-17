@@ -17,8 +17,17 @@ To create a new branch:
 - Run `git branch your-branch`
 - Checkout into that branch, `git checkout your-branch`
 
+OR
+- Run 'git checkout -b your-branch' to make the branch and switch to it
+
 ### Pushing
 
 - Add your changes, run `git add .`
+- If you want to add only particular changes then 'git add file-name'
+
+OR
+
+- Use 'git add -i' for an interactive way to select files to commit
+  
 - Commit your changes `git commit -m "commit-message"` (Note: the message after -m must be in quotes so it is read as a string)
 - To push run, `git push origin your-branch-name`
