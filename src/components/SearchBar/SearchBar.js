@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchBar = () => {
     return (
-      <div className="flex p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]">
+      <div className="mx-auto max-w-[1000px] relative flex p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]">
         <input
           type="text"
           id="search-recipe"
