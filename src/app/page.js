@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeViewGrid from '@/components/RecipieViewGrid/RecipeViewGrid'
+import './globals.css'
 
 const Home = () => {
 
@@ -71,24 +72,30 @@ const Home = () => {
   ];
 
   return (
-      <div className="md:m-28 px-5">
-        <div className="text-center">
-          <h1 className="text-5xl lg:text-8xl md:text-6xl font-bold text-black pt-20 pb-6">
-            Recipe Revive
-          </h1>
+      <div className="">
+        <div className="homeCover text-center height: md:h-[400px] h-auto">
+          <div className='homeCoverText mt-[30px] lg:mt-[50px]'>
+            <h1 className=" text-5xl lg:text-8xl md:text-6xl font-bold pb-6">
+              Recipe Revive
+            </h1>
+            <p>Find all your favorite recipes in one place!</p>
+          </div>
+          
 
           {/* Search component */}
-          <div className="lg:my-16 my-5">
+          <div className=" homeSearch md:my-16 my-5">
             <SearchBar />
           </div>
         </div>
 
-        {/* Load some recommendations for home page*/}
-        <div>
-          <h1 className='px-6 mb-10 text-center lg:text-left text-2xl lg:text-4xl md:text-3xl font-semibold text-black'>
-            Checkout some of our new recipes:
-          </h1>
-          <RecipeViewGrid recipes={newlyAddedRecipes}/>
+        <div className='lg:m-28 md:m-18 mt-8'>
+          {/* Load some recommendations for home page*/}
+          <div>
+            <h1 className='px-6 mb-10 text-center lg:text-left text-2xl lg:text-4xl md:text-3xl font-semibold text-black'>
+              Checkout some of our new recipes:
+            </h1>
+            <RecipeViewGrid recipes={newlyAddedRecipes}/>
+          </div>
         </div>
       </div>
   );
