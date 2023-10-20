@@ -10,8 +10,8 @@ export default function RecipeViewGrid({recipes}) {
       <div className={`sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center ${styles.container}`}>
           
 
-          {recipes.map(recipe => (
-              <RecipePreview recipe={recipe}></RecipePreview>
+          {recipes.map((recipe, index) => (
+              <RecipePreview key={index} recipe={recipe}></RecipePreview>
           ))}
 
       </div>
