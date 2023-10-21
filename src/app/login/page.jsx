@@ -1,11 +1,8 @@
+import LoginSignup from '@/components/LoginSignup/LoginSignup'
 import React from 'react'
 
-const pages = () => {
+export default function page() {
   return (
-    <div>
-      <h1>test</h1>
-    </div>
+    <div><LoginSignup></LoginSignup></div>
   )
 }
-
-export default pages

@@ -3,6 +3,7 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeViewGrid from '@/components/RecipieViewGrid/RecipeViewGrid'
 import './globals.css'
 
+
 const Home = () => {
 
   const newlyAddedRecipes = [
