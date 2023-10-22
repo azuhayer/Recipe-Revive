@@ -57,7 +57,11 @@ export default function RecipePreview({recipe}) {
             <div className={styles.details}>
                 <div className={styles.name}>{recipe.name}</div>
                 <div className={styles.rating}>
-                    <Rating name="half-rating-read" defaultValue={recipe.rating} precision={0.5} readOnly />
+                    <Rating name="half-rating-read" 
+                            value={recipe.rating}
+                            precision={0.5} 
+                            readOnly
+                    />
                 </div>
             </div>
         
