@@ -7,17 +7,17 @@ const NavBar = () => {
     <nav className="fixed w-full h-24 shadow-xl bg-white">
         <div className="flex justify-between items-center h-full w-full px-4">
             <Link href='/'>
-                <Image
-                src={Logo}  /* LOGO IMAGE GOES HERE */
+               {/* <Image
+                src={Logo}  
                 alt='Logo'
                 width='205'
                 height='75'
                 className='cursor-pointer'
                 priority
-                />
-            </Link>
+                /> */ }
+            </Link> 
             <div>
-                <ul className='hidden sm:flex'>
+                <ul className='hidden sm:flex text-black'>
                     <Link href='/about'>
                         <li className='ml-10 uppercase hover:border-b text-xl'>About Us</li>
                     </Link>
