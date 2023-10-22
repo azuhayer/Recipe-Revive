@@ -20,6 +20,9 @@ To create a new branch:
 OR
 - Run 'git checkout -b your-branch' to make the branch and switch to it
 
+If you forgot to make a branch before making changes, use the following command:
+- Run `git switch -c your-branch`
+
 ### Pushing
 
 - Add your changes, run `git add .`
@@ -31,3 +34,22 @@ OR
   
 - Commit your changes `git commit -m "commit-message"` (Note: the message after -m must be in quotes so it is read as a string)
 - To push run, `git push origin your-branch-name`
+
+### Delete branch locally
+
+- Run `git branch -d your-branch`
+- Note: "-d" can be changed to "-D" for force delete
+
+### View branch
+
+View all branches:
+
+- Run `git branch` to see all local branches
+
+View current branch:
+
+- Run `git branch --show-current`
+
+OR
+
+- Run `git rev-parse --abbrev-ref HEAD`
