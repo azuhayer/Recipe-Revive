@@ -1,6 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 import styles from './userProfile.module.css';
+import ProfileImage from '@/components/ProfileImage/ProfileImage';
+import ProfileInfo from '@/components/ProfileInfo/ProfileInfo';
+import Tabs from '@/components/Tabs/Tabs';
 
 export default function UserProfile() {
     // Initialize the 'activeTab' state variable to manage the currently active tab
@@ -9,8 +12,6 @@ export default function UserProfile() {
     const [isFormOpen, setIsFormOpen] = useState(false);
     // Initialize the 'selectedImage' state variable to hold the image selected for uploading
     const [selectedImage, setSelectedImage] = useState(null);
-    // User profile icon placeholder
-    const profileImage = "assets/profile.png";
 
     // Function to open the form modal
     const openForm = () => {
@@ -32,31 +33,11 @@ export default function UserProfile() {
         // Profile section
         <div className={styles.profile}>
             {/* User Image Placeholder*/}
-            <div className={styles.profileImage}>
-                <img src={profileImage} alt="User Profile" />
-            </div>
+            <ProfileImage />
             {/* User Name and Email Placeholder*/}
-            <div className={styles.profileName}>
-                <h3>[ Username ]</h3>
-                <h3>[ Email ]</h3>
-            </div>
+            <ProfileInfo />
             {/* Tabs Section */}
-            <div className={styles.tabs}>
-                {/* Tab for Saved Recipes */}
-                <button
-                className={activeTab === 'saved' ? styles.activeTab : styles.tab}
-                onClick={() => setActiveTab('saved')}
-                >
-                    Saved Recipes
-                </button>
-                {/* Tab for Created Recipes */}
-                <button
-                className={activeTab === 'created' ? styles.activeTab : styles.tab}
-                onClick={() => setActiveTab('created')}
-                >
-                    Created Recipes
-                </button>
-            </div>
+            <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
             {/* Tab Content Section */}
             <div className={styles.tabContent}>
                 {/* Display Saved Recipes when activeTab is 'saved' */}
