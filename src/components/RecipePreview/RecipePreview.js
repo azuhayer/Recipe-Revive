@@ -1,5 +1,5 @@
 'use client'
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import styles from './RecipePreview.module.css'
 import {FcLikePlaceholder,FcLike} from 'react-icons/fc'
 import {AiFillClockCircle} from 'react-icons/ai'
@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating';
 export default function RecipePreview({recipe}) {
     const [isHovered, setIsHovered] = useState(false);
     const [favorite, setFavorite] = useState(false);
-
+    
     const formatTime =(minutes) =>{
         const hours = Math.floor(minutes / 60);
         const remainingMinutes = minutes % 60;
@@ -30,7 +30,7 @@ export default function RecipePreview({recipe}) {
 
     return (
         <div onClick={()=>{viewRecipe()}} className={styles.parent}>
-            <div style={{backgroundImage:`url(${recipe.image})`}} className={styles.image}>
+            <div style={{backgroundImage:`url(${recipe?.image || (recipe?.recipe?.image || '')})`}} className={styles.image}>
                 <div className={styles.favoriteButtonContainer}>
                     <button
                         onClick={(e) => {
@@ -50,15 +50,15 @@ export default function RecipePreview({recipe}) {
                 </div>
                 <div className={styles.cookTime}>
                     <AiFillClockCircle/>
-                    <div>{formatTime(recipe.cookTime)}</div>
+                    <div>{formatTime(recipe?.cookTime || (recipe?.recipe?.totalTime || '0'))}</div>
 
                 </div>
             </div>
             <div className={styles.details}>
-                <div className={styles.name}>{recipe.name}</div>
+                <h1 className={styles.name}>{recipe?.name || (recipe?.recipe?.label || 'Unknown Recipe')}</h1>
                 <div className={styles.rating}>
                     <Rating name="half-rating-read" 
-                            value={recipe.rating}
+                            value={recipe?.rating || 0}
                             precision={0.5} 
                             readOnly
                     />
