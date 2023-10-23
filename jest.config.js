@@ -4,10 +4,10 @@ module.exports = {
         "./node_modules/"
     ],
     transform: {
-      "^.+\\.(js|jsx|ts|tsx)$": "./node_modules/babel-jest"
+        '^.+\\.(t|j)sx?$': '@swc/jest'
     },
     "moduleNameMapper": {
-        "^@/(.*)": "<rootDir>/src/$1"
+        '^@/(.*)$': '<rootDir>/src/$1',
     },
     verbose: true
 };

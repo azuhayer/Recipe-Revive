@@ -4,6 +4,7 @@ import styles from './explore.module.css'
 import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import Filterbutton from '@/components/FilterButton/Filterbutton';
 import filterByKeyword from '@/components/FilterButton/FilterLogic';
+import fetchData from '../../../utils/fetchData';
 
 export default function Explore() {
   const sampleRecipes = [
@@ -58,7 +59,20 @@ export default function Explore() {
     }
   ];
   const [sortByKeyword, setSortByKeyword] = useState("Sort By"); 
-  const sortedRecipes = filterByKeyword(sampleRecipes,sortByKeyword);
+  const [recipes,setRecipes] = useState(sampleRecipes)
+  const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
+
+  useEffect(() => {
+    (async () => {
+        try {
+            const data = await fetchData('chicken'); // Fetching chicken recipes as an example
+            setRecipes(data.hits);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    })();
+  }, []);
+
 
   return (
     <div className={`m-28 ${styles.parent}`}>
