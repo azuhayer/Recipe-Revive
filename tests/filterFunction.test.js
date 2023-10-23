@@ -46,4 +46,13 @@ describe('filterByKeyword function', () => {
         expect(originalArray).toEqual(sampleRecipes);
     });
 
+    it('should return the original array for non-string input', () => {
+        const resultNumber = filterByKeyword(sampleRecipes, 12345);
+        expect(resultNumber).toEqual(sampleRecipes);
+    
+        const resultObject = filterByKeyword(sampleRecipes, { key: 'value' });
+        expect(resultObject).toEqual(sampleRecipes);
+    });
+    
+
 });
