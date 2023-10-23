@@ -1,0 +1,75 @@
+.recipeGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+}
+  
+.recipeItem {
+    flex: 0 0 calc(30% - 20px); 
+    text-align: center;
+}
+  
+.recipeItem img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+}
+  
+.recipeItem p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.recipeFormModal {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.recipeForm {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+  
+.closeButton {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+  
+.formRow {
+    margin-bottom: 10px;
+}
+
+.submitButton {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #0056b3; 
+}
+
+.formInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px 0;
+}
