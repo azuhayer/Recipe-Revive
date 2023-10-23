@@ -2,3 +2,6 @@ spacing on the sides for pages currently is: m-28 or 112 px
 
 Riaz - lg:m-28 md:m-18 mt-8
 This is what I used for home margin
+
+
+Sample api call return:

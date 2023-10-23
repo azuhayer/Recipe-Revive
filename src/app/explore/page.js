@@ -59,16 +59,19 @@ export default function Explore() {
     }
   ];
   const [sortByKeyword, setSortByKeyword] = useState("Sort By"); 
-  const [recipes,setRecipes] = useState(sampleRecipes)
+  const [recipes,setRecipes] = useState(sampleRecipes);
+  const [fetchError, setFetchError] = useState(null);
   const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
 
   useEffect(() => {
     (async () => {
         try {
-            const data = await fetchData('chicken'); // Fetching chicken recipes as an example
+            const data = await fetchData('chicken'); 
+            console.log(data)
             setRecipes(data.hits);
         } catch (error) {
             console.error("Error fetching data:", error);
+            setFetchError('Failed to fetch recipes. Please try again later.');
         }
     })();
   }, []);
@@ -85,7 +88,10 @@ export default function Explore() {
             <div>{sampleRecipes.length} recipies found</div>
           </div>
           <div className={styles.results}>
-            <RecipeViewGrid recipes={sortedRecipes}/>
+          {fetchError ? (
+                <div className={styles.error}>{fetchError}</div>
+            ) : (
+            <RecipeViewGrid recipes={sortedRecipes}/>)}
 
           </div>
         </div>

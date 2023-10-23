@@ -30,7 +30,7 @@ export default function RecipePreview({recipe}) {
 
     return (
         <div onClick={()=>{viewRecipe()}} className={styles.parent}>
-            <div style={{backgroundImage:`url(${recipe.image})`}} className={styles.image}>
+            <div style={{backgroundImage:`url(${recipe.image || recipe.recipe.image})`}} className={styles.image}>
                 <div className={styles.favoriteButtonContainer}>
                     <button
                         onClick={(e) => {
@@ -50,12 +50,12 @@ export default function RecipePreview({recipe}) {
                 </div>
                 <div className={styles.cookTime}>
                     <AiFillClockCircle/>
-                    <div>{formatTime(recipe.cookTime)}</div>
+                    <div>{formatTime(recipe.cookTime||recipe.recipe.totalTime)}</div>
 
                 </div>
             </div>
             <div className={styles.details}>
-                <div className={styles.name}>{recipe.name}</div>
+                <div className={styles.name}>{recipe.name || recipe.recipe.label}</div>
                 <div className={styles.rating}>
                     <Rating name="half-rating-read" 
                             value={recipe.rating}
