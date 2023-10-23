@@ -2,38 +2,6 @@
     align-items: center;
 }
   
-.profileImage img {
-    width: 100px; 
-    height: 100px; 
-    border-radius: 50%; 
-    object-fit: cover;
-    margin: 10px auto 0;
-}
-
-.profileName {
-    text-align: center;
-}
-  
-.tabs {
-    display: flex;
-    margin-bottom: 20px;
-}
-  
-.tab {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-.activeTab {
-    background-color: #007bff;
-    color: #fff;
-    border: 1px solid #007bff;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-  
 .recipeGrid {
     display: flex;
     flex-wrap: wrap;
