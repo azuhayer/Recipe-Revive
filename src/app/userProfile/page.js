@@ -4,6 +4,7 @@ import styles from './userProfile.module.css';
 import ProfileImage from '@/components/ProfileImage/ProfileImage';
 import ProfileInfo from '@/components/ProfileInfo/ProfileInfo';
 import Tabs from '@/components/Tabs/Tabs';
+import RecipeForm from '@/components/RecipeForm/RecipeForm';
 
 export default function UserProfile() {
     // Initialize the 'activeTab' state variable to manage the currently active tab
@@ -12,7 +13,7 @@ export default function UserProfile() {
     const [isFormOpen, setIsFormOpen] = useState(false);
     // Initialize the 'selectedImage' state variable to hold the image selected for uploading
     const [selectedImage, setSelectedImage] = useState(null);
-
+    
     // Function to open the form modal
     const openForm = () => {
         setIsFormOpen(true);
@@ -23,10 +24,13 @@ export default function UserProfile() {
         setIsFormOpen(false);
     };
 
-     // Function to handle image selection
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedImage(file);
+    // Define the handleSubmitForm function
+    const handleSubmitForm = (formData) => {
+        // Handle the form submission here
+        console.log('Form data submitted:', formData);
+     
+        // Close the form after submission
+        closeForm();
     };
 
     return (
@@ -86,29 +90,7 @@ export default function UserProfile() {
                     </div>
                     {/* Add Recipe Form */}
                     {isFormOpen && (
-                    <div className={styles.recipeFormModal}>
-                        <div className={styles.recipeForm}>
-                            {/* Close Button */}
-                            <span className={styles.closeButton} onClick={closeForm}>
-                                &times;
-                            </span>
-                            <div className={styles.formRow}>
-                                <input type="text" placeholder="Recipe Name" className={styles.formInput} />
-                            </div>
-                            <div className={styles.formRow}>
-                                <textarea placeholder="Ingredients" className={styles.formInput}></textarea>
-                            </div>
-                            <div className={styles.formRow}>
-                                <textarea placeholder="Instructions" className={styles.formInput}></textarea>
-                            </div>
-                            <div className={styles.formRow}>
-                                <input type="file" accept="image/*" onChange={handleImageChange} />
-                            </div>
-                            <div className={styles.formRow}>
-                                <button className={styles.submitButton}>Submit</button>
-                            </div>
-                        </div>
-                    </div>
+                        <RecipeForm onSubmit={handleSubmitForm} onClose={closeForm} />
                     )}
                 </div>
                 )}
