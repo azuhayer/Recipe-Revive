@@ -69,24 +69,16 @@ export default function Explore({searchTerm}) {
   const searchParams = useSearchParams();
   //const [searchTerm, setSearchTerm] = useState(searchParams.get('search'));
 
-
-  const callAPi = (term) =>{
-    (async () => {
-      try {
-          const data = await fetchData(term); 
-          console.log(data)
-          setRecipes(data.hits);
-      } catch (error) {
-          console.error("Error fetching data:", error);
-          setFetchError('Failed to fetch recipes. Please try again later.');
-      }
-  })();
-  }
   useEffect(() => {
-      const search = searchParams.get('search');
-      console.log(search,"Asds");
-      callAPi(search);
-  }, [searchParams]);
+    (async () => {
+        try {
+            const data = await fetchData('chicken'); 
+            setRecipes(data.hits);
+        } catch (error) {
+            setFetchError('Failed to fetch recipes. Please try again later.');
+        }
+    })();
+  }, []);
 
 
   return (
