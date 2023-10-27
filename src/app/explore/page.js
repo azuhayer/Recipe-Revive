@@ -7,9 +7,7 @@ import filterByKeyword from '@/components/FilterButton/FilterLogic';
 import fetchData from '../../../utils/fetchData';
 import NavBar from '@/components/NavBar/NavBar';
 import SearchBar from '@/components/SearchBar/SearchBar';
-import {useRouter} from 'next/navigation';
-import { InferGetStaticPropsType, GetStaticProps } from 'next';
-// import { useRouter } from 'next/router';
+import {useRouter, useSearchParams} from 'next/navigation';
 
 export default function Explore({searchTerm}) {
   const sampleRecipes = [
@@ -64,16 +62,18 @@ export default function Explore({searchTerm}) {
     }
   ];
   const [sortByKeyword, setSortByKeyword] = useState("Sort By"); 
-  const [recipes,setRecipes] = useState(sampleRecipes);
+  const [recipes,setRecipes] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  //const [searchTerm, setSearchTerm] = useState(searchParams.get('search'));
 
 
-  const callAPi = () =>{
+  const callAPi = (term) =>{
     (async () => {
       try {
-          const data = await fetchData('chicken'); 
+          const data = await fetchData(term); 
           console.log(data)
           setRecipes(data.hits);
       } catch (error) {
@@ -83,9 +83,10 @@ export default function Explore({searchTerm}) {
   })();
   }
   useEffect(() => {
-
-    console.log("Asdasdas",searchTerm);
-  }, [searchTerm]);
+      const search = searchParams.get('search');
+      console.log(search,"Asds");
+      callAPi(search);
+  }, [searchParams]);
 
 
   return (
@@ -100,7 +101,7 @@ export default function Explore({searchTerm}) {
               <Filterbutton onSortChange={setSortByKeyword} currentSort={sortByKeyword}></Filterbutton>
             </div>
             <div className={`mb-8 ${styles.count}`}>
-              <div>{sampleRecipes.length} recipies found</div>
+              <div>{sortedRecipes.length} recipies found</div>
             </div>
             <div className={styles.results}>
             {fetchError ? (
@@ -115,8 +116,3 @@ export default function Explore({searchTerm}) {
     
   )
 }
-export async function getStaticProps(context) {
-  const term = context.query.search;
-  return { props: {searchTerm:term} }
-}
-
