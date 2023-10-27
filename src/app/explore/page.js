@@ -5,8 +5,11 @@ import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import Filterbutton from '@/components/FilterButton/Filterbutton';
 import filterByKeyword from '@/components/FilterButton/FilterLogic';
 import fetchData from '../../../utils/fetchData';
+import NavBar from '@/components/NavBar/NavBar';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import {useRouter, useSearchParams} from 'next/navigation';
 
-export default function Explore() {
+export default function Explore({searchTerm}) {
   const sampleRecipes = [
     {
       name:'Miso Soup',
@@ -59,43 +62,57 @@ export default function Explore() {
     }
   ];
   const [sortByKeyword, setSortByKeyword] = useState("Sort By"); 
-  const [recipes,setRecipes] = useState(sampleRecipes);
+  const [recipes,setRecipes] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  //const [searchTerm, setSearchTerm] = useState(searchParams.get('search'));
 
-  useEffect(() => {
+
+  const callAPi = (term) =>{
     (async () => {
-        try {
-            const data = await fetchData('chicken'); 
-            console.log(data)
-            setRecipes(data.hits);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            setFetchError('Failed to fetch recipes. Please try again later.');
-        }
-    })();
-  }, []);
+      try {
+          const data = await fetchData(term); 
+          console.log(data)
+          setRecipes(data.hits);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+          setFetchError('Failed to fetch recipes. Please try again later.');
+      }
+  })();
+  }
+  useEffect(() => {
+      const search = searchParams.get('search');
+      console.log(search,"Asds");
+      callAPi(search);
+  }, [searchParams]);
 
 
   return (
-    <div className={`m-28 ${styles.parent}`}>
-        <div className={`${styles.container}`}>
-          <div className={`flex justify-between items-center${styles.detailRow}`}>
-            <div className={styles.title}>Recipe Results</div>
-            <Filterbutton onSortChange={setSortByKeyword} currentSort={sortByKeyword}></Filterbutton>
-          </div>
-          <div className={`mb-8 ${styles.count}`}>
-            <div>{sampleRecipes.length} recipies found</div>
-          </div>
-          <div className={styles.results}>
-          {fetchError ? (
-                <div className={styles.error}>{fetchError}</div>
-            ) : (
-            <RecipeViewGrid recipes={sortedRecipes}/>)}
+    <div>
+      <div>
+        <SearchBar/>
+      </div>
+      <div className={`m-28 ${styles.parent}`}>
+          <div className={`${styles.container}`}>
+            <div className={`flex justify-between items-center${styles.detailRow}`}>
+              <div className={styles.title}>Recipe Results</div>
+              <Filterbutton onSortChange={setSortByKeyword} currentSort={sortByKeyword}></Filterbutton>
+            </div>
+            <div className={`mb-8 ${styles.count}`}>
+              <div>{sortedRecipes.length} recipies found</div>
+            </div>
+            <div className={styles.results}>
+            {fetchError ? (
+                  <div className={styles.error}>{fetchError}</div>
+              ) : (
+              <RecipeViewGrid recipes={sortedRecipes}/>)}
 
+            </div>
           </div>
-        </div>
-      
-    </div>
+      </div>
+  </div>
+    
   )
 }
