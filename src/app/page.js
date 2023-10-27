@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import './globals.css'
+import NavBar from '@/components/NavBar/NavBar';
 
 const Home = () => {
 
@@ -73,12 +74,13 @@ const Home = () => {
 
   return (
       <div className="">
-        <div className="homeCover text-center height: md:h-[400px] h-auto">
-          <div className='homeCoverText mt-[30px] lg:mt-[50px]'>
+        <NavBar/>
+        <div className="homeCover text-center">
+          <div className='homeCoverText mt-[30px] lg:mt-[50px] py-[30px] px-[20px]'>
             <h1 className=" text-5xl lg:text-8xl md:text-6xl font-bold pb-6">
-              Recipe Revive
+              Find your next meal
             </h1>
-            <p>Find all your favorite recipes in one place!</p>
+            <p className='text-[20px]'>Get all of your favorite recipes in one place!</p>
           </div>
           
 
