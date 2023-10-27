@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 .homeCover{
-  background-image: url('/assets/cover4.jpg');
-  height: 98vh;
+  background-image: url('https://images.pexels.com/photos/1907227/pexels-photo-1907227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  height: 100vh;
   background-position: center;
   width: auto;
   justify-content: center;
+  background-size: cover;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -15,8 +16,8 @@
 
 .homeCoverText {
   max-width: max-content;
-  background-color: rgba(0, 0, 0, 0.5);
+  /*background-color: rgba(0, 0, 0, 0.5);*/
   border-radius: 5px;
-  backdrop-filter: blur(5px);
+  /*backdrop-filter: blur(5px);*/
   color: white;
 }

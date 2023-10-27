@@ -35,14 +35,14 @@ const SearchBar = () => {
         <input
           type="text"
           id="search-recipe"
-          className=" w-full rounded-full outline-none px-8 py-2 lg:text-[30px] md:text-[20px]"
+          className=" w-full rounded-full outline-none px-12 py-5 lg:text-[20px] md:text-[10px]"
           placeholder="Search recipe"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
         <button
-          className="bg-slate-900 text-white  rounded-full px-8 lg:text-[30px] md:text-[20px]"
+          className="hover:bg-black bg-slate-900 text-white  rounded-full px-9 lg:text-[25px] md:text-[15px]"
           onClick={handleSearch}
         >
           <FaMagnifyingGlass/>

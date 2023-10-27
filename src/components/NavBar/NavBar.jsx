@@ -10,23 +10,23 @@ const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="top-0 bg-slate-900 "> {/**Large Nav */}
-        <div className="flex justify-between items-center px-4 py-2">
+    <nav style={{zIndex:'101'}} className="fixed w-full top-0 bg-slate-900 "> {/**Large Nav */}
+        <div className="flex justify-between items-center px-20 py-4">
             <a className='' href='/'>
-                <span className='text-white text-[40px] md:text-[60px] font-bold flex'>
-                    Recipe Revive
+                <span style={{fontFamily:'Chalkduster'}} className='text-white text-[10px] md:text-[15px] font-black flex font-mono'>
+                    RecipeRevive
                 </span>
             </a>
             <div>
                 <ul className='hidden md:flex text-white' >
                     <Link href='/about'>
-                        <li className='ml-3 hover:bg-white hover:text-black py-2 px-4 text-[18px] rounded-full'>About Us</li>
+                        <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>About Us</li>
                     </Link>
                     <Link href='/contact'>
-                        <li className='ml-3 hover:bg-white hover:text-black py-2 px-4 text-[18px] rounded-full'>Contact</li>
+                        <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>Contact</li>
                     </Link>
                     <Link href='/login-signup'>
-                        <li className='ml-3 hover:bg-white hover:text-black py-2 px-4 text-[18px] rounded-full'>Login</li>
+                        <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>Login</li>
                     </Link>
                 </ul>
             </div>
