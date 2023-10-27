@@ -91,7 +91,8 @@ export default function Explore({searchTerm}) {
 
   return (
     <div>
-      <div>
+      <NavBar></NavBar>
+      <div className="w-full top-0 bg-slate-900 p-20 mt-10" >
         <SearchBar/>
       </div>
       <div className={`m-28 ${styles.parent}`}>
