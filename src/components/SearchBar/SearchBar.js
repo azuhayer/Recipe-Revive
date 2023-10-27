@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import {FaMagnifyingGlass} from 'react-icons/fa6'
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,8 +12,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      <div className="mx-auto max-w-[1000px] xl:w-[1000px] lg:w-[900px] md:w-[600px] w-[350px] relative flex p-3 bg-white border rounded-lg">
+    <div className="mx-auto 2xl:w-[1500px] lg:w-[1000px] md:w-[800px] w-[350px] relative flex bg-white rounded-full border-[0.5px] shadow-md">
+      {/* <div className="mx-auto max-w-[1000px] xl:w-[1000px] lg:w-[900px] md:w-[600px] w-[350px] relative flex p-3 bg-white border rounded-lg">
         <input
           type="text"
           id="search-recipe"
@@ -30,7 +31,22 @@ const SearchBar = () => {
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
           </svg>
         </button>
-      </div>
+      </div> */}
+        <input
+          type="text"
+          id="search-recipe"
+          className=" w-full rounded-full outline-none px-12 py-5 lg:text-[20px] md:text-[10px]"
+          placeholder="Search recipe"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+
+        <button
+          className="hover:bg-black bg-slate-900 text-white  rounded-full px-9 lg:text-[25px] md:text-[15px]"
+          onClick={handleSearch}
+        >
+          <FaMagnifyingGlass/>
+        </button>
     </div>
   );
 };
