@@ -24,8 +24,11 @@ export default function RecipePreview({recipe}) {
         console.log("Route to recipe page");
     }
     const likeRecipe=()=>{
-        console.log("Like recipe")
-        setFavorite(true);
+        if(favorite){
+            setFavorite(false);
+        }else{
+            setFavorite(true);
+        }
     }
     function getBackgroundColor(mealType) {
         switch(mealType[0]) {
