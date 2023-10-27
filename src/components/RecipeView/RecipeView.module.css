@@ -1,0 +1,17 @@
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.centerStyle{
+    text-align: 'center';
+}
+.flexContainerStyle{
+    display: 'flex';
+    width: '75%';
+    margin: 'auto';
+}
+.flexItemStyle{
+    flex: 1;
+}
