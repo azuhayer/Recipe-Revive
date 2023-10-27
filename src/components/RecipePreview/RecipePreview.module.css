@@ -43,6 +43,7 @@
 .name{
     font-weight: 500;
     margin-bottom: 8px;
+    font-size: 18px;
 
 }
 .rating>span{
@@ -65,4 +66,20 @@
 }
 .cookTime>div{
     padding-left: 3px;
+}
+.cal{
+
+    border:0.1px black solid;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 7px;
+    color: white;
+    background-color: black;
+}
+.mealType{
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 7px;
+    color: white;
+    margin-left: 8px;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from '@/components/SearchBar/SearchBar';
-import RecipeViewGrid from '@/components/RecipieViewGrid/RecipeViewGrid'
+import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import './globals.css'
 
 const Home = () => {
