@@ -39,11 +39,11 @@ export default function FilterButton({currentSort, onSortChange}) {
         selectedKeys={selectedKeys}
         onSelectionChange={handleSelectionChange}
       >
-
         <DropdownItem key="Sort By">Sort By</DropdownItem>
-        <DropdownItem key="rating">Rating</DropdownItem>
         <DropdownItem key="name">Name</DropdownItem>
         <DropdownItem key="cookTime">Cook Time</DropdownItem>
+        <DropdownItem key="calories">Calories</DropdownItem>
+        <DropdownItem key="mealType">Meal Type</DropdownItem>
       </DropdownMenu>
     </Dropdown>
     </div>
