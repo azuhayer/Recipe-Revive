@@ -8,9 +8,10 @@ import fetchData from '../../../utils/fetchData';
 import NavBar from '@/components/NavBar/NavBar';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import {useRouter} from 'next/navigation';
+import { InferGetStaticPropsType, GetStaticProps } from 'next';
 // import { useRouter } from 'next/router';
 
-export default function Explore() {
+export default function Explore({searchTerm}) {
   const sampleRecipes = [
     {
       name:'Miso Soup',
@@ -68,20 +69,23 @@ export default function Explore() {
   const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
   const router = useRouter();
 
-  useEffect(() => {
+
+  const callAPi = () =>{
     (async () => {
-        try {
-            const data = await fetchData('chicken'); 
-            console.log(data)
-            setRecipes(data.hits);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            setFetchError('Failed to fetch recipes. Please try again later.');
-        }
-    })();
-    console.log(router.query.search)
-    
-  }, [router.query.search]);
+      try {
+          const data = await fetchData('chicken'); 
+          console.log(data)
+          setRecipes(data.hits);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+          setFetchError('Failed to fetch recipes. Please try again later.');
+      }
+  })();
+  }
+  useEffect(() => {
+
+    console.log("Asdasdas",searchTerm);
+  }, [searchTerm]);
 
 
   return (
@@ -111,3 +115,8 @@ export default function Explore() {
     
   )
 }
+export async function getStaticProps(context) {
+  const term = context.query.search;
+  return { props: {searchTerm:term} }
+}
+
