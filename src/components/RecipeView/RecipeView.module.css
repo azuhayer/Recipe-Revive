@@ -1,17 +1,29 @@
-.center {
+.page{
+    width: 100vw;
+    height: 100vh;
+    background-color: bisque;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.image {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    margin: auto;
+    max-width: auto; 
+    max-height: 75vh; 
+    height: auto;
+    border-radius: 5%;
 }
 .centerStyle{
-    text-align: 'center';
+    text-align: center;
+    font-size: 2cap;
 }
 .flexContainerStyle{
-    display: 'flex';
-    width: '75%';
-    margin: 'auto';
+    display: flex;
+    width: 75%;
+    margin: auto;
 }
 .flexItemStyle{
     flex: 1;
+}
+.list{
+    list-style-type: square;
 }
