@@ -1,0 +1,19 @@
+.quickLinks{
+    display: flex;
+    color: white;
+
+}
+.quickLinks>a{
+    border: 0.1px white solid;
+    margin: 4px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.quickLinks>a:hover{
+    background-color: white;
+    color: black;
+}

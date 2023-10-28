@@ -1,0 +1,37 @@
+.profile {
+    align-items: center;
+}
+  
+.recipeGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+}
+  
+.recipeItem {
+    flex: 0 0 calc(30% - 20px); 
+    text-align: center;
+}
+  
+.recipeItem img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+}
+  
+.recipeItem p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.submitButton {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #0056b3; 
+}
