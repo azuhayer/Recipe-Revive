@@ -30,26 +30,6 @@ const filterByKeyword = (recipes, sortByKeyword) => {
             return recipes;
     }
 };
-function groupByCategory(recipes) {
-    const categories = {
-      "breakfast": [],
-      "brunch": [],
-      "lunch": [],
-      "dinner": [],
-      "lunch/dinner":[],
-      "others": []
-    };
-  
-    recipes.forEach(recipe => {
-      if (categories[recipe.category]) {
-        categories[recipe.category].push(recipe);
-      } else {
-        categories.others.push(recipe);
-      }
-    });
-  
-    return categories;
-  }  
 
 export default filterByKeyword;
   
