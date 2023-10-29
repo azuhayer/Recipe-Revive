@@ -1,0 +1,29 @@
+.page{
+    width: 100vw;
+    height: 100vh;
+    background-color: bisque;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.image {
+    display: block;
+    margin: auto;
+    max-width: auto; 
+    max-height: 75vh; 
+    height: auto;
+    border-radius: 5%;
+}
+.centerStyle{
+    text-align: center;
+    font-size: 2cap;c
+}
+.flexContainerStyle{
+    display: flex;
+    width: 75%;
+    margin: auto;
+}n
+.flexItemStyle{
+    flex: 1;
+}
+.list{
+    list-style-type: square;
+}
