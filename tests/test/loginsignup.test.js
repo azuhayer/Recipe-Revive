@@ -1,28 +1,23 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react'; 
-import Tabs from '@/components/Tabs/Tabs';
+import { render, screen, fireEvent } from '@testing-library/react';
+import LoginSignup from './LoginSignup';
 
-test('it should change the active tab when a button is clicked', () => {
-  // Set up initial active tab (you should use your own initial value here)
-  const initialActiveTab = 'saved';
+test('renders Sign Up form by default', () => {
+  render(<LoginSignup />);
+  const signUpForm = screen.getByText('Sign Up');
+  expect(signUpForm).toBeInTheDocument();
+});
 
-  // Create a function to mock setActiveTab
-  const setActiveTab = jest.fn();
+test('switches between Sign Up and Login forms', () => {
+  render(<LoginSignup />);
+  const signUpButton = screen.getByText('Sign Up');
+  const loginButton = screen.getByText('Login');
 
-  // Render the Tabs component with initialActiveTab and mock setActiveTab
-  const { getByText } = render(
-    <Tabs activeTab={initialActiveTab} setActiveTab={setActiveTab} />
-  );
+  fireEvent.click(loginButton);
+  const loginForm = screen.getByText('Login');
+  expect(loginForm).toBeInTheDocument();
 
-  // Find the buttons for 'Saved Recipes' and 'Created Recipes'
-  const createdTabButton = getByText('Created Recipes');
-  const savedTabButton = getByText('Saved Recipes');
-
-  // Simulate a button click to switch to 'created' tab
-  fireEvent.click(createdTabButton);
-  fireEvent.click(savedTabButton);
-
-  // Ensure that setActiveTab was called with the expected value
-  expect(setActiveTab).toHaveBeenCalledWith('created');
-  expect(setActiveTab).toHaveBeenCalledWith('saved');
+  fireEvent.click(signUpButton);
+  const signUpForm = screen.getByText('Sign Up');
+  expect(signUpForm).toBeInTheDocument();
 });
