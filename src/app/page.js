@@ -2,7 +2,9 @@ import React from 'react';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import './globals.css'
-
+import NavBar from '@/components/NavBar/NavBar';
+import Link from 'next/link';
+import styles from './home.module.css'
 const Home = () => {
 
   const newlyAddedRecipes = [
@@ -73,12 +75,13 @@ const Home = () => {
 
   return (
       <div className="">
-        <div className="homeCover text-center height: md:h-[400px] h-auto">
-          <div className='homeCoverText mt-[30px] lg:mt-[50px]'>
-            <h1 className=" text-5xl lg:text-8xl md:text-6xl font-bold pb-6">
-              Recipe Revive
+        <NavBar/>
+        <div className="homeCover text-center">
+          <div className='homeCoverText'>
+            <h1 className=" text-3xl lg:text-6xl md:text-4xl font-bold pb-6">
+              Find your next meal
             </h1>
-            <p>Find all your favorite recipes in one place!</p>
+            <p className='text-[18px] font-thin'>Get all of your favorite recipes in one place!</p>
           </div>
           
 
@@ -86,12 +89,18 @@ const Home = () => {
           <div className=" homeSearch md:my-16 my-5">
             <SearchBar />
           </div>
+
+          <div className={styles.quickLinks}>
+            <Link href="/explore/?search=Chicken">Search Chicken</Link>
+            <Link href="/explore/?search=Waffle">Search Waffle</Link>
+            <Link href="/explore/?search=Pizza">Search Pizza</Link>
+          </div>
         </div>
 
         <div className='lg:m-28 md:m-18 mt-8'>
           {/* Load some recommendations for home page*/}
           <div>
-            <h1 className='px-6 mb-10 text-center lg:text-left text-2xl lg:text-4xl md:text-3xl font-semibold text-black'>
+            <h1 className='px-6 mb-10 text-center lg:text-left text-2xl lg:text-3xl md:text-3xl font-bold text-black'>
               Checkout some of our new recipes:
             </h1>
             <RecipeViewGrid recipes={newlyAddedRecipes}/>
