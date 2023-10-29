@@ -24,27 +24,8 @@ export default function RecipePreview({recipe}) {
         console.log("Route to recipe page");
     }
     const likeRecipe=()=>{
-        if(favorite){
-            setFavorite(false);
-        }else{
-            setFavorite(true);
-        }
-    }
-    function getBackgroundColor(mealType) {
-        switch(mealType[0]) {
-            case 'breakfast':
-                return 'rgb(246, 202, 48)';
-            case 'lunch/dinner':
-                return 'rgb(144, 144, 147)';
-            case 'brunch':
-                return 'rgb(250, 107, 245)';
-            case 'lunch':
-                return 'rgb(153, 107, 250)';
-            case 'dinner':
-                return 'rgb(10, 148, 94)'
-            default:
-                return 'rgb(222, 127, 54)';
-        }
+        console.log("Like recipe")
+        setFavorite(true);
     }
 
     return (
@@ -67,32 +48,21 @@ export default function RecipePreview({recipe}) {
                         )}
                     </button>
                 </div>
-                <div>
-                {(recipe?.cookTime || recipe?.recipe?.totalTime)?(
                 <div className={styles.cookTime}>
-                    <AiFillClockCircle></AiFillClockCircle>
-                    <div>{formatTime(recipe?.cookTime || recipe?.recipe?.totalTime)}</div>
+                    <AiFillClockCircle/>
+                    <div>{formatTime(recipe?.cookTime || (recipe?.recipe?.totalTime || '0'))}</div>
 
-                </div>):null}</div>
+                </div>
             </div>
             <div className={styles.details}>
                 <h1 className={styles.name}>{recipe?.name || (recipe?.recipe?.label || 'Unknown Recipe')}</h1>
-                {(recipe?.rating) ? (<div className={styles.rating}>
+                <div className={styles.rating}>
                     <Rating name="half-rating-read" 
                             value={recipe?.rating || 0}
                             precision={0.5} 
                             readOnly
                     />
-                </div>):null}
-                {recipe.recipe?.calories ? (
-                <span className={styles.cal}>
-                    {Math.floor(recipe.recipe?.calories)} cal
-                </span>):null}
-                {recipe.recipe?.mealType ? (
-                <span style={{backgroundColor: getBackgroundColor(recipe.recipe?.mealType)}} className={styles.mealType}>
-                    {recipe.recipe?.mealType[0]} 
-                </span>):null}
-
+                </div>
             </div>
         
         </div>

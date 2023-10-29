@@ -5,11 +5,8 @@ import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
 import Filterbutton from '@/components/FilterButton/Filterbutton';
 import filterByKeyword from '@/components/FilterButton/FilterLogic';
 import fetchData from '../../../utils/fetchData';
-import NavBar from '@/components/NavBar/NavBar';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import {useRouter, useSearchParams} from 'next/navigation';
 
-export default function Explore({searchTerm}) {
+export default function Explore() {
   const sampleRecipes = [
     {
       name:'Miso Soup',
@@ -62,12 +59,9 @@ export default function Explore({searchTerm}) {
     }
   ];
   const [sortByKeyword, setSortByKeyword] = useState("Sort By"); 
-  const [recipes,setRecipes] = useState([]);
+  const [recipes,setRecipes] = useState(sampleRecipes);
   const [fetchError, setFetchError] = useState(null);
   const sortedRecipes = filterByKeyword(recipes,sortByKeyword);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  //const [searchTerm, setSearchTerm] = useState(searchParams.get('search'));
 
   useEffect(() => {
     (async () => {
@@ -82,30 +76,24 @@ export default function Explore({searchTerm}) {
 
 
   return (
-    <div>
-      <NavBar></NavBar>
-      <div className="w-full top-0 bg-slate-900 p-20 mt-10" >
-        <SearchBar/>
-      </div>
-      <div className={`m-28 ${styles.parent}`}>
-          <div className={`${styles.container}`}>
-            <div className={`flex justify-between items-center${styles.detailRow}`}>
-              <div className={styles.title}>Recipe Results</div>
-              <Filterbutton onSortChange={setSortByKeyword} currentSort={sortByKeyword}></Filterbutton>
-            </div>
-            <div className={`mb-8 ${styles.count}`}>
-              <div>{sortedRecipes.length} recipies found</div>
-            </div>
-            <div className={styles.results}>
-            {fetchError ? (
-                  <div className={styles.error}>{fetchError}</div>
-              ) : (
-              <RecipeViewGrid recipes={sortedRecipes}/>)}
-
-            </div>
+    <div className={`m-28 ${styles.parent}`}>
+        <div className={`${styles.container}`}>
+          <div className={`flex justify-between items-center${styles.detailRow}`}>
+            <div className={styles.title}>Recipe Results</div>
+            <Filterbutton onSortChange={setSortByKeyword} currentSort={sortByKeyword}></Filterbutton>
           </div>
-      </div>
-  </div>
-    
+          <div className={`mb-8 ${styles.count}`}>
+            <div>{sampleRecipes.length} recipies found</div>
+          </div>
+          <div className={styles.results}>
+          {fetchError ? (
+                <div className={styles.error}>{fetchError}</div>
+            ) : (
+            <RecipeViewGrid recipes={sortedRecipes}/>)}
+
+          </div>
+        </div>
+      
+    </div>
   )
 }
