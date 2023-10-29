@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import styles from './RecipeViewGrid.module.css'
 import RecipePreview from '../RecipePreview/RecipePreview'
