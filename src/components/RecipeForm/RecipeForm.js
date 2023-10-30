@@ -7,6 +7,7 @@ export default function RecipeForm({ onSubmit, onClose }) {
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(''); // New state for error message
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -14,11 +15,14 @@ export default function RecipeForm({ onSubmit, onClose }) {
   };
 
   const handleSubmit = () => {
+    // Clear any previous error message
+    setErrorMessage('');
+
     // Validate form fields
     if (recipeName.trim() === '' || ingredients.trim() === '' || instructions.trim() === '') {
-      alert('Please fill in all required fields.');
+      setErrorMessage('Please fill in all required fields.');
       return; // Prevent form submission if validation fails
-    }   
+    }
 
     // Handle form submission, e.g., validate input and call onSubmit
     onSubmit({
@@ -36,6 +40,9 @@ export default function RecipeForm({ onSubmit, onClose }) {
         <span className={styles.closeButton} onClick={onClose}>
           &times;
         </span>
+        {errorMessage && ( 
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
         <div className={styles.formRow}>
           <input
             type="text"
