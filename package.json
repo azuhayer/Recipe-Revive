@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:start": "npm run build && next start",
     "cypress:open": "cypress open",
     "test-cy": "start-server-and-test start http://localhost:3000 cypress"
   },
