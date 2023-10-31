@@ -32,7 +32,7 @@ jobs:
       run: npm install
 
     - name: Build the next.js project
-      run: npm run test:start 
+      run: npm run build 
 
     - name: Jest Test
       run: npm test test:coverage
