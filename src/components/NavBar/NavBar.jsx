@@ -25,7 +25,7 @@ const NavBar = () => {
                     <Link href='/contact'>
                         <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>Contact</li>
                     </Link>
-                    <Link href='/login-signup'>
+                    <Link href='/login'>
                         <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>Login</li>
                     </Link>
                 </ul>
