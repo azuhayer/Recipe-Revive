@@ -14,6 +14,12 @@ export default function RecipeForm({ onSubmit, onClose }) {
   };
 
   const handleSubmit = () => {
+    // Validate form fields
+    if (recipeName.trim() === '' || ingredients.trim() === '' || instructions.trim() === '') {
+      alert('Please fill in all required fields.');
+      return; // Prevent form submission if validation fails
+    }   
+
     // Handle form submission, e.g., validate input and call onSubmit
     onSubmit({
       recipeName,
