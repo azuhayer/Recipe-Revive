@@ -72,11 +72,7 @@ const SignUpForm = () => {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                {/*<div className={styles.inputLabel}>Account type</div>
-                <select onChange={(e) => setUserType(e.target.value)} className={styles.inputField}>
-                    <option value="Ordinary User">Ordinary User</option>
-                    <option value="Super User">Super User</option>
-                </select>*/}
+                
                 <div className={styles.inputLabel}>Password</div>
                 <input
                     className={styles.inputField}
