@@ -1,8 +1,8 @@
-import LoginSignup from '@/components/LoginSignup/LoginSignup'
+import LoginForm from '@/components/LoginForm/LoginForm'
 import React from 'react'
 
 export default function page() {
   return (
-    <div><LoginSignup></LoginSignup></div>
+    <div><LoginForm></LoginForm></div>
   )
 }
