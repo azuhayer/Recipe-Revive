@@ -52,7 +52,7 @@ const LoginForm = () => {
                 <button onClick={submitHandler} className={styles.submitButton}>Sign in</button>
                 <div className={styles.signUpText}>
                     <div>
-                        Don't have an account?
+                        Dont have an account?
                     </div>
                     <Link href="/signUp"> Sign up for free</Link>
                 </div>
