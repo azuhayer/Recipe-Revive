@@ -1,0 +1,17 @@
+.imageCont{
+
+    background-image: url('https://images.pexels.com/photos/7440434/pexels-photo-7440434.jpeg?auto=compress&cs=tinysrgb&w=1200');
+    background-position: center;
+    background-size: cover;
+}
+.container{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.container>div{
+    width: 50%;
+}
+.parent{
+    min-height: 100vh;
+}

@@ -31,14 +31,17 @@ const SignUpForm = () => {
             if(auth){
                 signOut(auth);
             }
-           
+            console.log("auth: ",auth);
             try{
                 const userData = await createUserWithEmailAndPassword(auth, email,password);
                 await updateProfile(auth.currentUser,{displayName:`${name}`});
                 router.push("/");
             }catch(error){
+    
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log("error code",errorCode);
+                console.log("error message: ",errorMessage);
                 setError(errorMessage);
             }
         }
@@ -49,7 +52,7 @@ const SignUpForm = () => {
         <div className={styles.container}>
             <div>
                 <div className={styles.greeting}>Get started</div>
-                <div className={styles.subGreeting}>Provide the details below to create your ordinary user account</div>
+                <div className={styles.subGreeting}>Provide the details below to create an account</div>
                 <div className={styles.error}>{error}</div>
                 <div className={styles.inputLabel}>Name</div>
                 <input
@@ -93,7 +96,7 @@ const SignUpForm = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
 
-                <button className={styles.submitButton} onClick={submitHandler}>Apply</button>
+                <button className={styles.submitButton} onClick={submitHandler}>SignUp</button>
                 <div className={styles.signUpText}>
                     <div>
                         Already have an account?
