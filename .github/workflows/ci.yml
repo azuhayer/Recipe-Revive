@@ -1,0 +1,48 @@
+name: CI - RecipeRevive
+
+on:
+  pull_request:
+    branches: [ "dev", "prod"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the PR
+      uses: actions/checkout@v3
+    
+    - name: Install node 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install playwright
+      run: npx playwright install --with-deps
+    
+    - name: Build the next.js project
+      run: npm run build 
+    
+    - name: Run unit/integration tests and generate converage
+      run: npm run test:coverage
+    
+    - name: Run e2e test
+      run: npm run test:e2e
+
+    - name: Upload unit and integration test code coverage
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: unit and integration test coverage
+        path: coverage/
+        retention-days: 30
+    - name: Upload playwright E2E report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: e2e-playwright-report
+        path: playwright-report/
+        retention-days: 30
