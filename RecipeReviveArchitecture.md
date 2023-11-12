@@ -1,6 +1,6 @@
 ## High Level Component Diagram 
 
-![Component Diagram] (http://url/to/Component Diagram.png)
+![Component Diagram] (http://url/to/ComponentDiagram.png)
 
 Localhost (Web Server):
 Description: The localhost component represents the web server that serves static files (HTML, CSS, JavaScript) to the client's browser.
@@ -35,14 +35,14 @@ Edamam API server communicates with Node.js to respond to requests for food and 
 
 ## Relationship Diagram 
 
-![Relationship Diagram] (http://url/to/Relationship Diagram.png)
+![Relationship Diagram] (http://url/to/RelationshipDiagram.png)
 
 In the relationship diagram, the entities exhibit various associations, reflecting the key interactions within the context of our Recipe-Revive application. A "User" entity is at the core, establishing relationships with other entities such as "savedRecipe" and "createdRecipe" as well as "Recipe". A "User" can save multiple recipes and create numerous recipes. The "savedRecipe" entitiy has a relationship with the "Recipe" entity, indicating that it represents instances of recipes. Additionally, the "recipeForm" entity is associated with the "createdRecipe" entity, meaning that it serves as a form or template for users to input details when creating a recipe. The "searchRecipe" entity is linked to "Recipe," implying it is involved in the process of searching and retrieving existing recipes. Finally, the "Filter" entity is associated with "searchRecipe," suggesting its role in refining and narrowing down search results based on specific criteria. Overall, this relationship diagram outlines the connections between users, recipes, forms, and search functionalities within the application.
 
 
 ## Flow Diagram 
 
-![Flow Diagram] (http://url/to/Flow Diagram.png)
+![Flow Diagram] (http://url/to/FlowDiagram.png)
 
 The flow diagram for user login/signup authentication outlines the sequential steps involved in the process of authenticating users within the Recipe-Revive application. 
 Initially the flow begins with the user being greeted to the home page, where they have the option to login/signup to the application. Upon clicking that button the User
