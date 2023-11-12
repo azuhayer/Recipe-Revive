@@ -35,7 +35,7 @@ Edamam API server communicates with Node.js to respond to requests for food and 
 
 ## Relationship Diagram 
 
-![Relationship Diagram] (http://url/to/RelationshipDiagram.png)
+![Relationship Diagram] (https://github.com/azuhayer/Recipe-Revive/blob/zuhayer-session9-assignment/RelationshipDiagram.png)
 
 In the relationship diagram, the entities exhibit various associations, reflecting the key interactions within the context of our Recipe-Revive application. A "User" entity is at the core, establishing relationships with other entities such as "savedRecipe" and "createdRecipe" as well as "Recipe". A "User" can save multiple recipes and create numerous recipes. The "savedRecipe" entitiy has a relationship with the "Recipe" entity, indicating that it represents instances of recipes. Additionally, the "recipeForm" entity is associated with the "createdRecipe" entity, meaning that it serves as a form or template for users to input details when creating a recipe. The "searchRecipe" entity is linked to "Recipe," implying it is involved in the process of searching and retrieving existing recipes. Finally, the "Filter" entity is associated with "searchRecipe," suggesting its role in refining and narrowing down search results based on specific criteria. Overall, this relationship diagram outlines the connections between users, recipes, forms, and search functionalities within the application.
 
