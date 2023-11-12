@@ -37,7 +37,7 @@ OR
 
 ### Pulling 
 
-- Use 'git pull origin dev' to pull all the new content in the 'dev' branch into a new branch
+- Use `git pull origin dev` to pull all the new content in the 'dev' branch into a new branch
 
 ### Delete branch locally
 
