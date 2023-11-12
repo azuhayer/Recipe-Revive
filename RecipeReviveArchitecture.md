@@ -42,7 +42,7 @@ In the relationship diagram, the entities exhibit various associations, reflecti
 
 ## Flow Diagram 
 
-![Flow Diagram] (http://url/to/FlowDiagram.png)
+![Flow Diagram] (https://github.com/azuhayer/Recipe-Revive/blob/zuhayer-session9-assignment/FlowDiagram.png)
 
 The flow diagram for user login/signup authentication outlines the sequential steps involved in the process of authenticating users within the Recipe-Revive application. 
 Initially the flow begins with the user being greeted to the home page, where they have the option to login/signup to the application. Upon clicking that button the User
