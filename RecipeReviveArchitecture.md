@@ -9,21 +9,21 @@ Hosts and serves static files for the web application.
 Manages incoming HTTP requests from clients.
 
 Node.js (App Server):
-Description: Node.js is a server-side JavaScript runtime used to execute server-side code for your web application.
+Description: Node.js is a server-side JavaScript runtime used to execute server-side code for our web application.
 Responsibilities:
 Executes server-side application logic and handles dynamic content generation.
 Manages the communication between the client-side (browser) and the server-side.
 
 Edamam (API Server):
-Description: Edamam serves as the API server in your architecture, providing functionality related to retrieving and managing data related to food and nutrition.
+Description: Edamam serves as the API server in our architecture, providing functionality related to retrieving and managing data related to food and nutrition.
 Responsibilities:
-Exposes API endpoints that your application can call to retrieve information about food and nutrition from Edamam's services.
+Exposes API endpoints that our application can call to retrieve information about food and nutrition from Edamam's services.
 Handles requests from your Node.js application and returns relevant data.
 
 Firebase (Database Server):
-Description: Firebase serves as the database server, storing and managing the persistent data for your web application.
+Description: Firebase serves as the database server, storing and managing the persistent data for our web application.
 Responsibilities:
-Stores and retrieves data necessary for your application, such as user information, preferences, or any other relevant data.
+Stores and retrieves data necessary for our application, such as user information, preferences, or any other relevant data.
 Provides a secure and scalable way to manage your application's data.
 
 Interactions:
