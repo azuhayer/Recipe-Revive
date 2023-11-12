@@ -1,6 +1,6 @@
 ## High Level Component Diagram 
 
-![Component Diagram] (http://url/to/ComponentDiagram.png)
+![Component Diagram] (https://github.com/azuhayer/Recipe-Revive/blob/zuhayer-session9-assignment/ComponentDiagram.png)
 
 Localhost (Web Server):
 Description: The localhost component represents the web server that serves static files (HTML, CSS, JavaScript) to the client's browser.
