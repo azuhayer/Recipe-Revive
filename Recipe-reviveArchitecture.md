@@ -1,5 +1,5 @@
 ## High Level Component Diagram 
-![Alt text](image.png)
+![!\[Alt text\](image.png)](Highcomponentdiagram.png)
 ```
 Localhost (Web Server):
 
