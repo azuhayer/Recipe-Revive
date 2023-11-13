@@ -16,5 +16,6 @@ In the proposed entity relationship diagram, the system is structured around sev
 
 ## Flow Diagram
 
-![Flow Diagram](flow_diagram.jpg)
+![Flow Diagram](Recipe_Revive_Flow_Diagram.png)
 
+The following flow diagram outlines the process of user authentication flow within the system. Users begin at the home page, where they have the option to click on the login button, initiating a redirection to the login page. The login page presents a decision point with a diamond shape indicating whether the user is registered. If not, users can navigate to the signup page through a signup link, filling out registration information that is then connected to the Firebase database for storage. If users are registered, they proceed to the login information rectangle, where they enter their credentials. The login information is sent to the Firebase database, with a check for failed logins leading users back to the login information stage. Upon successful login, an arrow points to the rectangle labeled "200/OK," signifying a successful HTTP response, and users are redirected back to the home page. 
