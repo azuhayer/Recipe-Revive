@@ -5,3 +5,6 @@ This is what I used for home margin
 
 
 Sample api call return:
+
+
+Added an E2E test for the userProfile

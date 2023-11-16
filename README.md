@@ -35,6 +35,10 @@ OR
 - Commit your changes `git commit -m "commit-message"` (Note: the message after -m must be in quotes so it is read as a string)
 - To push run, `git push origin your-branch-name`
 
+### Pulling 
+
+- Use `git pull origin dev` to pull all the new content in the 'dev' branch into a new branch
+
 ### Delete branch locally
 
 - Run `git branch -d your-branch`
