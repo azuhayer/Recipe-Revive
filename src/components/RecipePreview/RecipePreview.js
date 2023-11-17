@@ -115,11 +115,13 @@ export default function RecipePreview({recipe}) {
             };
             if (saved.includes(id)){
                 setFavorite(true)
+            }else{
+                setFavorite(false);
             }
         };
         getsaved();
       }
-    }, [user])
+    }, [user, recipe])
     
 
     return (
