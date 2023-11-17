@@ -7,13 +7,14 @@ import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
 import { db,auth } from '@/firebase/config';
 import { setDoc,doc,docSnap,getDoc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation'
 
 
 export default function RecipePreview({recipe}) {
     const [isHovered, setIsHovered] = useState(false);
     const [favorite, setFavorite] = useState(false);
     const [id,setId]= useState('');
-    
+    const router = useRouter();
     const formatTime =(minutes) =>{
         const hours = Math.floor(minutes / 60);
         const remainingMinutes = minutes % 60;
@@ -24,7 +25,7 @@ export default function RecipePreview({recipe}) {
         return hoursString + ' ' + minutesString;
     }
     const viewRecipe=()=>{
-        console.log("Route to recipe page");
+        router.push(`/details/?recipeId=${id}`);
     }
     const likeRecipe=async ()=>{
         const ref = doc(db, "savedRecipes", user.uid);
@@ -102,9 +103,11 @@ export default function RecipePreview({recipe}) {
 
     //setting recipes as liked if it was previously liked
     useEffect(() => {
-      if (user && recipe._links){
-        const id = extractRecipeId(recipe._links.self.href);
-        setId(id);
+        if (recipe._links) {
+            const id = extractRecipeId(recipe._links.self.href);
+            setId(id);
+        }
+      if (user){
         const getsaved = async ()=>{
             const ref = doc(db, "savedRecipes", user.uid);
             const docSnap = await getDoc(ref)
