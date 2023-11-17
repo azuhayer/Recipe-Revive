@@ -84,7 +84,6 @@ export default function Explore({searchTerm}) {
   }
   useEffect(() => {
       const search = searchParams.get('search');
-      console.log(search,"Asds");
       callAPi(search);
   }, [searchParams]);
 
