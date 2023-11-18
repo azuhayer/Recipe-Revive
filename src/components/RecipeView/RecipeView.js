@@ -1,6 +1,8 @@
 'use client'
 import React from 'react';
 import styles from './RecipeView.module.css';
+import CommentSection from '../CommentSection/CommentSection';
+
 
 function RecipeView({ recipeData }) {
 
@@ -51,6 +53,10 @@ function RecipeView({ recipeData }) {
                 </div>
               </a>
             </div>
+
+          {/* Comment Section Component Here */}
+          <CommentSection />  
+
           </div>
         </div>
       </div>

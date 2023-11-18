@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid'
@@ -5,6 +6,7 @@ import './globals.css'
 import NavBar from '@/components/NavBar/NavBar';
 import Link from 'next/link';
 import styles from './home.module.css'
+import CommentSection from '@/components/CommentSection/CommentSection';
 const Home = () => {
 
   const newlyAddedRecipes = [
