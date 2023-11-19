@@ -3,6 +3,7 @@ import React from 'react'
 import {AiOutlineBars} from 'react-icons/ai'
 import Link from "next/link";
 import { useState } from 'react';
+import { Popover } from '@headlessui/react';
 
 
 
@@ -18,10 +19,30 @@ const NavBar = () => {
                 </span>
             </a>
             <div>
+                
                 <ul className='hidden md:flex text-white' >
-                    <Link href='/about'>
-                        <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>About Us</li>
-                    </Link>
+                    {/*about us*/}
+                    <Popover className="relative ">
+                        <Popover.Button className='select-none focus:outline-none focus:ring-0'>
+                            <li className='ml-3  font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>About Us</li>
+                        </Popover.Button>
+
+                        <Popover.Panel className="absolute z-10 ml-[-200px]">
+                            <div className="flex flex-col w-[300px] bg-white text-black p-10 rounded-[10px] mt-5 ">
+                                As food lovers, our goal is to create a web-application that is easy to use, search and share your favorite recipes, 
+                                using a simple and minimalistic UI.
+
+                                <Link className='mt-4 justify-center text-center' href='https://github.com/azuhayer/Recipe-RevivE'>
+                                    <li className='ml-3 hover:bg-slate-800 hover:text-white py-2 px-4 text-[13px] rounded-full'>Visit our GitHub</li>
+                                </Link>
+
+                            </div>
+
+                            
+
+                        </Popover.Panel>
+                    </Popover>
+
                     <Link href='/contact'>
                         <li className='ml-3 font-light hover:bg-white hover:text-black py-2 px-4 text-[13px] rounded-full'>Contact</li>
                     </Link>

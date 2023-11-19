@@ -8,3 +8,15 @@ Sample api call return:
 
 
 Added an E2E test for the userProfile
+
+
+TODO:
+Create context- Chris
+Save recipes to local storage for guest users?
+Connect the new recipes to firebase
+Do proper re-routing
+fix profile page UI 
+Connect explore page to detials page
+Weekly planner
+Somehow minimze the calls made for saving recipes - too many calls made there, one everytime for liking and disliking
+and one everytime to check if a recipe is liked - maybe we should consider havign a context for saved recipes as well

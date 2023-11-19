@@ -5,12 +5,16 @@ import {FcLikePlaceholder,FcLike} from 'react-icons/fc'
 import {AiFillClockCircle} from 'react-icons/ai'
 import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
+import { db,auth } from '@/firebase/config';
+import { setDoc,doc,docSnap,getDoc } from 'firebase/firestore';
+import { useRouter } from 'next/navigation'
 
 
 export default function RecipePreview({recipe}) {
     const [isHovered, setIsHovered] = useState(false);
     const [favorite, setFavorite] = useState(false);
-    
+    const [id,setId]= useState('');
+    const router = useRouter();
     const formatTime =(minutes) =>{
         const hours = Math.floor(minutes / 60);
         const remainingMinutes = minutes % 60;
@@ -21,15 +25,49 @@ export default function RecipePreview({recipe}) {
         return hoursString + ' ' + minutesString;
     }
     const viewRecipe=()=>{
-        console.log("Route to recipe page");
+        router.push(`/details/?recipeId=${id}`);
     }
-    const likeRecipe=()=>{
+    const likeRecipe=async ()=>{
+        const ref = doc(db, "savedRecipes", user.uid);
+        const docSnap = await getDoc(ref)
+        let saved =[]
+        if (docSnap.exists()) {
+            let recipes = docSnap.data().saved;
+            saved = recipes;
+            console.log("exists",recipes)
+        };
+
         if(favorite){
-            setFavorite(false);
+            saved = saved.filter(existingId => existingId !== id);
+            console.log("Saved",saved);
+            
+            try {
+                await setDoc(ref, {saved:saved}, { merge: true }); // Write data with merge option
+                console.log('Document successfully written!');
+
+                setFavorite(false);
+            } catch (e) {
+                console.error("Error writing document: ", e);
+            }
         }else{
-            setFavorite(true);
+            saved.push(id);
+            console.log("saved",saved)
+            try {
+                await setDoc(ref, {saved:saved}, { merge: true }); // Write data with merge option
+                console.log('Document successfully written!');
+                setFavorite(true);
+            } catch (e) {
+                console.error("Error writing document: ", e);
+            }
         }
+
     }
+
+    function extractRecipeId(url) {
+        const parts = url.split('/');
+        const lastSegment = parts.pop();  
+        return lastSegment.split('?')[0];
+      }
     function getBackgroundColor(mealType) {
         switch(mealType[0]) {
             case 'breakfast':
@@ -46,6 +84,48 @@ export default function RecipePreview({recipe}) {
                 return 'rgb(222, 127, 54)';
         }
     }
+
+
+    const [user, setUser] = useState(null)
+    //Need to replace with context and do re-routing if no user signed in!!
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+              console.log("user:",user)
+              setUser(user);
+            } else {
+              setUser(null);
+            }
+          });
+          return () => unsubscribe();
+      
+    }, [])
+
+    //setting recipes as liked if it was previously liked
+    useEffect(() => {
+        if (recipe._links) {
+            const id = extractRecipeId(recipe._links.self.href);
+            setId(id);
+        }
+      if (user){
+        const getsaved = async ()=>{
+            const ref = doc(db, "savedRecipes", user.uid);
+            const docSnap = await getDoc(ref)
+            let saved =[]
+            if (docSnap.exists()) {
+                let recipes = docSnap.data().saved;
+                saved = recipes;
+            };
+            if (saved.includes(id)){
+                setFavorite(true)
+            }else{
+                setFavorite(false);
+            }
+        };
+        getsaved();
+      }
+    }, [user, recipe])
+    
 
     return (
         <div onClick={()=>{viewRecipe()}} className={styles.parent}>
