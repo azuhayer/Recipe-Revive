@@ -1,5 +1,6 @@
 .profile {
     align-items: center;
+    margin-top: 50px;
 }
   
 .recipeGrid {
@@ -34,4 +35,9 @@
 
 .submitButton:hover {
     background-color: #0056b3; 
+}
+.tabContainer{
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
 }
