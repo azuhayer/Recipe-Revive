@@ -15,5 +15,5 @@ resource "vercel_project" "example" {
   }
 }
 provider "vercel" {
-  api_token = "uWwDIOugTHm32oe76oyMJDxQ"
+  api_token = "NEXT_PUBLIC_VERCEL_KEY"
 }
