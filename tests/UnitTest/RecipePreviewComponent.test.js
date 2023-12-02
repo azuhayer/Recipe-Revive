@@ -20,15 +20,20 @@ jest.mock('firebase/app', () => ({
 }));
 
 jest.mock('firebase/firestore', () => ({
-  getFirestore: jest.fn(() => ({
-    doc: jest.fn(() => ({
-      get: jest.fn(() => ({
-        exists: false,
-      })),
-    })),
+  getFirestore: jest.fn(),
+  doc:jest.fn(),
+  getDoc:jest.fn(()=> Promise.resolve({
+    exists: jest.fn(() => false), // here
+    data: jest.fn(() => ({
+      saved: []
+    }))
   })),
+
+
 }));
 
+
+//import { setDoc,doc,docSnap,getDoc } from 'firebase/firestore';
 jest.mock('firebase/auth', () => ({
   getAuth: jest.fn(() => ({
     onAuthStateChanged: jest.fn((callback) => {
