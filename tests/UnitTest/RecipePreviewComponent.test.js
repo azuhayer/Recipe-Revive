@@ -23,8 +23,7 @@ jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(() => ({
     doc: jest.fn(() => ({
       get: jest.fn(() => ({
-        exists: true,
-        data: () => ({ saved: ['savedRecipeId'] }),
+        exists: false,
       })),
     })),
   })),
