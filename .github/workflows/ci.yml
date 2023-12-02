@@ -41,7 +41,7 @@ jobs:
     
     - name: Check E2E test existence
       run: |
-        e2e_test_count=$(find /tests/E2ETest -name '*.spec.js' | wc -l)
+        e2e_test_count=$(find tests/E2ETest -name '*.spec.js' | wc -l)
         if [ "$e2e_test_count" -gt 0 ]; then
           echo "E2E tests found. Proceeding with E2E test job."
           exit 0
