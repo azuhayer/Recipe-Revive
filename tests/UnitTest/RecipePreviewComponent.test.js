@@ -15,13 +15,24 @@ jest.mock('firebase/app', () => ({
 }));
 
 jest.mock('firebase/firestore', () => ({
-  getFirestore: jest.fn(),
+  getFirestore: jest.fn(() => ({
+    collection: jest.fn(() => ({
+      onSnapshot: jest.fn((callback) => {
+        const unsubscribe = jest.fn();
+        callback({/* mock snapshot data */});
+        return unsubscribe; 
+      }),
+    })),
+  })),
 }));
 
 jest.mock('firebase/auth', () => ({
   getAuth: jest.fn(() => ({
-    onAuthStateChanged: jest.fn(),
-    // other mock functions
+    onAuthStateChanged: jest.fn((callback) => {
+      const unsubscribe = jest.fn();
+      callback({/* mock user data */});
+      return unsubscribe; 
+    }),
   })),
 }));
 
