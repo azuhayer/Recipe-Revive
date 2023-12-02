@@ -9,6 +9,19 @@ import RecipePreview from '@/components/RecipePreview/RecipePreview';
 jest.mock("next/navigation", () => ({
     useRouter: jest.fn()
 }))
+jest.mock('firebase/app', () => ({
+  initializeApp: jest.fn(),
+  getApps: jest.fn(() => []),
+}));
+
+jest.mock('firebase/firestore', () => ({
+  getFirestore: jest.fn(),
+}));
+
+jest.mock('firebase/auth', () => ({
+  getAuth: jest.fn(),
+}));
+
 
 describe('RecipePreview Component Tests', () => {
   test('renders RecipePreview with provided recipe data', () => {
