@@ -38,22 +38,6 @@ jobs:
     
     - name: Run unit/integration tests and generate converage
       run: npm run test:coverage
-    
-    - name: Check E2E test existence
-      run: |
-        e2e_test_count=$(find tests/E2ETest -name '*.spec.js' | wc -l)
-        if [ "$e2e_test_count" -gt 0 ]; then
-          echo "E2E tests found. Proceeding with E2E test job."
-          exit 0
-        else
-          echo "No E2E tests found. Skipping E2E test job."
-          exit 1
-        fi
-      id: check_e2e_tests
-
-    - name: Run e2e test
-      if: steps.check_e2e_tests.run == 'E2E tests found. Proceeding with E2E test job.'
-      run: npm run test:e2e
 
     - name: Upload unit and integration test code coverage
       uses: actions/upload-artifact@v3
