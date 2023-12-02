@@ -6,6 +6,11 @@ import "@testing-library/jest-dom";
 import { UserEvent } from '@testing-library/user-event';
 import RecipePreview from '@/components/RecipePreview/RecipePreview';
 
+const mockUser={
+  displayName:'John',
+  uid:"ae3781"
+}
+
 jest.mock("next/navigation", () => ({
     useRouter: jest.fn()
 }))
@@ -16,12 +21,11 @@ jest.mock('firebase/app', () => ({
 
 jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(() => ({
-    collection: jest.fn(() => ({
-      onSnapshot: jest.fn((callback) => {
-        const unsubscribe = jest.fn();
-        callback({/* mock snapshot data */});
-        return unsubscribe; 
-      }),
+    doc: jest.fn(() => ({
+      get: jest.fn(() => ({
+        exists: true,
+        data: () => ({ saved: ['savedRecipeId'] }),
+      })),
     })),
   })),
 }));
@@ -30,7 +34,7 @@ jest.mock('firebase/auth', () => ({
   getAuth: jest.fn(() => ({
     onAuthStateChanged: jest.fn((callback) => {
       const unsubscribe = jest.fn();
-      callback({/* mock user data */});
+      callback({mockUser});
       return unsubscribe; 
     }),
   })),
