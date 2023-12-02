@@ -1,25 +1,47 @@
 import { test, expect } from '@playwright/test';
-/*
-    E2E test - Searching
-
-*/
 
 test('Simple Searching', async ({ page }) => {
-    await page.goto('http://localhost:3000/');
+  // Mock user object for auth
+  const mockUser = {
+    displayName: 'John',
+    uid: 'ae3781',
+  };
 
-    const searchBar = await page.isVisible('input[type="text"]');
-    expect(searchBar).toBe(true);
+  // Mocking Firestore behavior
+  await page.evaluate(() => {
+    window.getFirestore = jest.fn(); // Mock getFirestore function
+    window.doc = jest.fn(); // Mock doc function
+    window.getDoc = jest.fn(() => Promise.resolve({
+      exists: jest.fn(() => false), // Simulate document does not exist
+      data: jest.fn(() => ({
+        saved: [],
+      })),
+    }));
+  });
 
-    const searchingChciken  = await page.isVisible('text=Search Chicken');
-    expect(searchingChciken).toBe(true);
-    //Search Chicken
-    await page.click('text=Search Chicken');
+  // Mock Firebase auth
+  await page.evaluate((mockUser) => {
+    window.getAuth = jest.fn(() => ({
+      onAuthStateChanged: jest.fn((callback) => {
+        const unsubscribe = jest.fn();
+        callback({ mockUser });
+        return unsubscribe;
+      }),
+    }));
+  }, mockUser);
 
-    await page.waitForURL('http://localhost:3000/explore?search=Chicken');
-    
+  await page.goto('http://localhost:3000/');
 
-    await page.waitForSelector('text=Chicken Vesuvio');
-    const checkRecipe = await page.isVisible('text=Chicken Vesuvio');
-    expect(checkRecipe).toBe(true);
+  const searchBar = await page.isVisible('input[type="text"]');
+  expect(searchBar).toBe(true);
 
+  const searchingChicken = await page.isVisible('text=Search Chicken');
+  expect(searchingChicken).toBe(true);
+
+  await page.click('text=Search Chicken');
+  await page.waitForURL('http://localhost:3000/explore?search=Chicken');
+  await page.waitForSelector('text=Chicken Vesuvio');
+
+  const checkRecipe = await page.isVisible('text=Chicken Vesuvio');
+  expect(checkRecipe).toBe(true);
 });
