@@ -5,6 +5,7 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import RecipeView from '@/components/RecipeView/RecipeView';
 import fetchRecipeById from '../../../utils/fetchRecipeDetails';
 import { useRouter, useSearchParams } from 'next/navigation';
+import CommentSection from '@/components/CommentSection/CommentSection';
 
 export default function Page() {
   const [recipeData, setRecipeData] = useState(null);
@@ -17,6 +18,7 @@ export default function Page() {
     try {
       const data = await fetchRecipeById(recipeId);
       setRecipeData(data);
+      console.log(setRecipeData);
     } catch (error) {
       console.error('Error fetching recipe:', error);
     }
@@ -34,6 +36,12 @@ export default function Page() {
         <SearchBar />
       </div>
       {recipeData && <RecipeView recipeData={recipeData} />}
+      <div className=' flex p-[20px] bg-slate-900 justify-center align-middle '>
+        <div className='lg:w-8/12 '>
+          <CommentSection />
+        </div>
+      </div>
     </div>
+    
   );
 }
