@@ -4,11 +4,10 @@ import * as React from 'react';
 import styles from './userProfile.module.css';
 import ProfileImage from '@/components/ProfileImage/ProfileImage';
 import ProfileInfo from '@/components/ProfileInfo/ProfileInfo';
-//import Tabs from '@/components/Tabs/Tabs';
 import RecipeForm from '@/components/RecipeForm/RecipeForm';
-import { db,auth } from '@/firebase/config';
+import { db, auth } from '@/firebase/config';
 
-import { setDoc,doc,docSnap,getDoc } from 'firebase/firestore';
+import { setDoc, doc, addDoc, deleteDoc, docSnap, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import fetchRecipeById from '../../../utils/fetchRecipeDetails';
 import RecipeViewGrid from '@/components/RecipeViewGrid/RecipeViewGrid';
 import NavBar from '@/components/NavBar/NavBar';
@@ -16,41 +15,128 @@ import NavBar from '@/components/NavBar/NavBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
-
 import Box from '@mui/material/Box';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
 export default function UserProfile() {
-    // Initialize the 'activeTab' state variable to manage the currently active tab
-    const [activeTab, setActiveTab] = useState('saved'); 
-    // Initialize the 'isFormOpen' state variable to manage the visibility of a recipe form
-    const [isFormOpen, setIsFormOpen] = useState(false);
-    // Initialize the 'selectedImage' state variable to hold the image selected for uploading
-    const [selectedImage, setSelectedImage] = useState(null);
-
     const [savedRecipes,setSavedRecipes] = useState([]);
 
     const [value, setValue] = useState("1");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-      };
-
-    // Function to open the form modal
-    const openForm = () => {
-        setIsFormOpen(true);
     };
 
-    // Function to close the form modal
-    const closeForm = () => {
-        setIsFormOpen(false);
-    };
+    /** Firebase Form Set Up **/
+    const [recipes, setRecipes] = useState([]);
 
+    const [form, setForm] = useState({
+        title: "",
+        desc: "",
+        ingredients: [],
+        steps: []
+    });
 
-    //Need to replace with context and do re-routing if no user signed in!!
+    const [popupActive, setPopupActive] = useState(false);
+
+    const recipesCollectionRef = collection(db, "createdRecipes")
+
+    useEffect(() => {
+        onSnapshot(recipesCollectionRef, snapshot => {
+            setRecipes(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    viewing: false,
+                    ...doc.data()
+                }
+            }))
+        })
+    }, [])
+
+    const handleView = id => {
+        const recipesClone = [...recipes]
+    
+        recipesClone.forEach(recipe => {
+            if (recipe.id === id) {
+                recipe.viewing = !recipe.viewing
+            } else {
+                recipe.viewing = false
+            }
+        })
+    
+        setRecipes(recipesClone)
+    }
+    
+    const handleSubmit = e => {
+        e.preventDefault()
+    
+        if (
+            !form.title ||
+            !form.desc ||
+            !form.ingredients ||
+            !form.steps
+        ) {
+            alert("Please fill out all fields")
+            return
+        }
+    
+        addDoc(recipesCollectionRef, form)
+    
+        setForm({
+            title: "",
+            desc: "",
+            ingredients: [],
+            steps: []
+        })
+    
+        setPopupActive(false)
+    }
+    
+    const handleIngredient = (e, i) => {
+        const ingredientsClone = [...form.ingredients]
+    
+        ingredientsClone[i] = e.target.value
+    
+        setForm({
+            ...form,
+            ingredients: ingredientsClone
+        })
+    }
+    
+    const handleStep = (e, i) => {
+        const stepsClone = [...form.steps]
+    
+        stepsClone[i] = e.target.value
+    
+        setForm({
+            ...form,
+            steps: stepsClone
+        })
+    }
+    
+    const handleIngredientCount = () => {
+        setForm({
+            ...form,
+            ingredients: [...form.ingredients, ""]
+        })
+    }
+    
+    const handleStepCount = () => {
+        setForm({
+          ...form,
+          steps: [...form.steps, ""]
+        })
+    }
+    
+    const removeRecipe = id => {
+        deleteDoc(doc(db, "createdRecipes", id))
+    }
+
+    // Need to replace with context and do re-routing if no user signed in!!
 
     const [user, setUser] = useState('');
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
@@ -60,11 +146,10 @@ export default function UserProfile() {
               setUser(null);
             }
           });
-          return () => unsubscribe();
-      
+          return () => unsubscribe();     
     }, [])
 
-    //get saved recipes
+    // Get saved recipes
     useEffect(() => {
         if (user){
             const getsaved = async ()=>{
@@ -87,26 +172,10 @@ export default function UserProfile() {
                 .catch(error => {
                     console.error("An error occurred:", error);
                 });
-
             };
-
             getsaved();
-
-
-
         }
       }, [user])
-    
-    
-
-    // Define the handleSubmitForm function
-    const handleSubmitForm = (formData) => {
-        // Handle the form submission here
-        console.log('Form data submitted:', formData);
-     
-        // Close the form after submission
-        closeForm();
-    };
 
     return (
         <>
@@ -136,29 +205,111 @@ export default function UserProfile() {
                 <TabPanel value="3">
                     <div className={styles.createdRecipes}>
                         {/* Button to add a new recipe */}
-                        <button onClick={openForm} className={styles.submitButton}>Add Recipe</button>
-                        
-                        <div className={styles.recipeGrid}>
-                            <div className={styles.recipeItem}>
-                                <img src="assets/cover4.jpg" alt="Recipe 1" />
-                                <p>Recipe 1</p>
-                            </div>
-
-                            <div className={styles.recipeItem}>
-                                <img src="assets/cover5.jpeg" alt="Recipe 2" />
-                                <p>Recipe 2</p>
-                            </div>
-
-                            <div className={styles.recipeItem}>
-                                <img src="assets/cover6.jpeg" alt="Recipe 3" />
-                                <p>Recipe 3</p>
-                            </div>
+                        <div className={styles.buttons}>
+                            <button onClick={() => setPopupActive(!popupActive)} className={styles.button}>Add recipe</button>
                         </div>
+                        <div className={styles.recipes}>
+                            { recipes.map((recipe, i) => (
+                                <div className={styles.recipe} key={recipe.id}>
+                                    <h3 className={styles.h3}>{ recipe.title }</h3>
+
+                                    <p className={styles.h3}dangerouslySetInnerHTML={{ __html: recipe.desc }}></p>
+
+                                    { recipe.viewing && <div>
+                                        <h3 className={styles.h3}>Ingredients:</h3>
+                                        <ul className={styles.ul}>
+                                            { recipe.ingredients.map((ingredient, i) => (
+                                                <li key={i} className={styles.ul}>{ ingredient }</li>
+                                            ))}
+                                        </ul>
+
+                                        <h3 className={styles.h3}>Steps:</h3>
+                                        <ol className={styles.ul}>
+                                            { recipe.steps.map((step, i) => (
+                                                <li key={i} className={styles.ul}>{ step }</li>
+                                            ))}
+                                        </ol>
+                                    </div>}
+
+                                    <div className={styles.buttons}>
+                                        <button onClick={() => handleView(recipe.id)}>View { recipe.viewing ? 'less' : 'more' }</button>
+                                        <button className={styles.remove} onClick={() => removeRecipe(recipe.id)}>Remove</button>
+                                    </div>
+
+                                </div>
+                            ))}
+                        </div>
+                        
+                        { popupActive && <div className={styles.popup}>
+                            <div className={styles.popupInner}>
+                                <h2>Add a new recipe</h2>
+
+                                <form onSubmit={handleSubmit}>
+
+                                    <div className={styles.formGroup}>
+                                        <label>Title</label>
+                                        <input 
+                                            type="text" 
+                                            value={form.title} 
+                                            onChange={e => setForm({...form, title: e.target.value})} 
+                                            className={styles.input}/>
+                                    </div>
+
+                                    <div className={styles.formGroup}>
+                                        <label>Description</label>
+                                        <textarea 
+                                            type="text" 
+                                            value={form.desc} 
+                                            onChange={e => setForm({...form, desc: e.target.value})} 
+                                            className={styles.textarea}/>
+                                    </div>
+
+                                    <div className={styles.formGroup}>
+                                        <label>Ingredients</label>
+                                        {
+                                            form.ingredients.map((ingredient, i) => (
+                                            <input 
+                                                type="text"
+                                                key={i}
+                                                value={ingredient} 
+                                                onChange={e => handleIngredient(e, i)} 
+                                                className={styles.input}/>
+                                            ))
+                                        }
+                                        <div className={styles.buttons}>
+                                            <button type="button" onClick={handleIngredientCount}>Add ingredient</button>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.formGroup}>
+                                        <label>Steps</label>
+                                        {
+                                            form.steps.map((step, i) => (
+                                            <textarea 
+                                                type="text"
+                                                key={i}
+                                                value={step} 
+                                                onChange={e => handleStep(e, i)} 
+                                                className={styles.textarea}/>
+                                            ))
+                                        }
+                                        <div className={styles.buttons}>
+                                            <button type="button" onClick={handleStepCount}>Add step</button>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.buttons}>
+                                        <button type="submit">Submit</button>
+                                        <button type="button" class={styles.remove} onClick={() => setPopupActive(false)}>Close</button>
+                                    </div>
+
+                                </form> 
+                            </div>
+                        </div>}
                     </div>
                 </TabPanel>
             </TabContext>
             </div>
-
         </div>
         </>
     );
