@@ -103,7 +103,7 @@ export default function RecipePreview({recipe}) {
 
     //setting recipes as liked if it was previously liked
     useEffect(() => {
-        if (recipe._links) {
+        if (recipe && recipe._links) {
             const id = extractRecipeId(recipe._links.self.href);
             setId(id);
         }
@@ -164,13 +164,13 @@ export default function RecipePreview({recipe}) {
                             readOnly
                     />
                 </div>):null}
-                {recipe.recipe?.calories ? (
+                {recipe?.recipe?.calories ? (
                 <span className={styles.cal}>
-                    {Math.floor(recipe.recipe?.calories)} cal
+                    {Math.floor(recipe?.recipe?.calories)} cal
                 </span>):null}
-                {recipe.recipe?.mealType ? (
-                <span style={{backgroundColor: getBackgroundColor(recipe.recipe?.mealType)}} className={styles.mealType}>
-                    {recipe.recipe?.mealType[0]} 
+                {recipe?.recipe?.mealType ? (
+                <span style={{backgroundColor: getBackgroundColor(recipe?.recipe?.mealType)}} className={styles.mealType}>
+                    {recipe?.recipe?.mealType[0]} 
                 </span>):null}
 
             </div>
