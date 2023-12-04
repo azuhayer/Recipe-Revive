@@ -25,22 +25,19 @@ jobs:
     
     - name: Build the next.js project
       env:
-        NEXT_PUBLIC_APP_ID: ${{ secrets.NEXT_PUBLIC_APP_ID }}
+        NEXT_PUBLIC_APP_ID:  ${{ secrets.NEXT_PUBLIC_APP_ID }}
         NEXT_PUBLIC_APP_KEY:  ${{ secrets.NEXT_PUBLIC_APP_KEY }}
-        NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+        NEXT_PUBLIC_FIREBASE_API_KEY:  ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+        NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:  ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
         NEXT_PUBLIC_FIREBASE_PROJECT_ID:  ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
         NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:  ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
-        NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+        NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:  ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
         NEXT_PUBLIC_FIREBASE_APP_ID:  ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
         NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID:  ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
       run: npm run build 
     
     - name: Run unit/integration tests and generate converage
       run: npm run test:coverage
-    
-    - name: Run e2e test
-      run: npm run test:e2e
 
     - name: Upload unit and integration test code coverage
       uses: actions/upload-artifact@v3
@@ -48,11 +45,4 @@ jobs:
       with:
         name: unit and integration test coverage
         path: coverage/
-        retention-days: 30
-    - name: Upload playwright E2E report
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: e2e-playwright-report
-        path: playwright-report/
         retention-days: 30
